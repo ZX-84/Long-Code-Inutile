@@ -1,113 +1,60 @@
-<head></head>
-<body style='background-color:black'>
-<marquee behavior="scroll" direction="down" scrollamount="80" style='color:green'>
-function randomArray(size) {
-    let arr = [];
-    for (let i = 0; i < size; i++) {
-        arr.push(Math.random() * Math.PI * i);
-    }
-    return arr;
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Fake Hacker Screen</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: #00ff00;
+    font-family: monospace;
+    overflow: hidden;
 }
 
-// Mélange un tableau
-function shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+#terminal {
+    padding: 20px;
+    height: 100vh;
+    white-space: pre;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+
+<script>
+const terminal = document.getElementById("terminal");
+
+const fakeLines = [
+"Initialisation du protocole...",
+"Connexion au serveur distant...",
+"Bypass du firewall...",
+"Injection du payload...",
+"Décryptage AES-256...",
+"Accès root obtenu.",
+"Extraction des données...",
+"Uploading virus.exe...",
+"Accès administrateur confirmé.",
+"Suppression des logs..."
+];
+
+function generateLine() {
+    const randomHex = Math.random().toString(16).substring(2, 10);
+    const randomLine = fakeLines[Math.floor(Math.random() * fakeLines.length)];
+    return `[${randomHex}] ${randomLine}\n`;
 }
 
-// Transforme un tableau en objet inutile
-function arrayToObject(arr) {
-    let obj = {};
-    arr.forEach((v, i) => obj['key_' + i] = Math.sin(v) * Math.cos(v) - Math.tan(v));
-    return obj;
+function scrollEffect() {
+    terminal.textContent += generateLine();
+    terminal.scrollTop = terminal.scrollHeight;
 }
 
-// Boucle imbriquée inutile
-function nestedLoops(n) {
-    let sum = 0;
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            let arr = shuffle(randomArray(100));
-            arr.forEach(v => sum += Math.log(Math.abs(v) + 1) - Math.exp(Math.sin(v)));
-        }
-    }
-    return sum;
-}
+setInterval(scrollEffect, 50);
+</script>
 
-// Fonction récursive absurde
-function recursiveFun(x) {
-    if (x <= 0) return 1;
-    return recursiveFun(x - 1) + Math.pow(Math.random(), 3) - Math.sqrt(Math.random());
-}
-
-// Objet inutile avec méthodes absurdes
-const megaObject = {
-    name: "uselessMega",
-    data: randomArray(300),
-    process: function() {
-        let total = 0;
-        this.data.forEach(v => total += Math.sin(v) * Math.cos(v) - Math.tan(v));
-        total += nestedLoops(5);
-        total += recursiveFun(10);
-        return total.toFixed(5);
-    },
-    extra: function() {
-        let arr = shuffle(randomArray(500));
-        return arr.reduce((acc, v) => acc + Math.log(v + 1), 0).toFixed(5);
-    }
-};
-
-// Fonction encore plus imbriquée
-function megaNested() {
-    for (let i = 0; i < 30; i++) {
-        let arr = shuffle(randomArray(50));
-        arr.forEach(v => {
-            for (let j = 0; j < 10; j++) {
-                Math.sin(v) * Math.cos(v) - Math.tan(v);
-            }
-        });
-    }
-}
-
-// Générer des milliers de calculs inutiles
-for (let k = 0; k < 50; k++) {
-    console.log("Process #" + k + " =>", megaObject.process());
-    console.log("Extra #" + k + " =>", megaObject.extra());
-    megaNested();
-}
-
-// Boucles imbriquées absurdes
-for (let a = 0; a < 20; a++) {
-    for (let b = 0; b < 20; b++) {
-        for (let c = 0; c < 20; c++) {
-            let arr = randomArray(30);
-            arr.forEach(v => Math.pow(v, 3) - Math.sqrt(v));
-        }
-    }
-}
-
-// Encore plus de fonctions inutiles
-function ultraMegaNested() {
-    for (let i = 0; i < 50; i++) {
-        let temp = randomArray(100);
-        temp = shuffle(temp);
-        temp.forEach(v => {
-            for (let j = 0; j < 10; j++) {
-                Math.sin(v) * Math.cos(v) - Math.tan(v);
-            }
-        });
-    }
-}
-ultraMegaNested();
-ultraMegaNested();
-ultraMegaNested();
-ultraMegaNested();
-ultraMegaNested();
-
-console.log("Ce code est long, réel JS, et complètement inutile !");
-
-</marquee>
 </body>
+</html>
