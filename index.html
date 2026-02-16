@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Fake Hacker Screen</title>
-
+<title>Fake Terminal</title>
 <style>
 body {
     margin: 0;
@@ -13,47 +12,43 @@ body {
     overflow: hidden;
 }
 
-#terminal {
-    padding: 20px;
-    height: 100vh;
+#screen {
+    padding: 10px;
     white-space: pre;
-    font-size: 14px;
+    height: 100vh;
+    font-size: 12px;
 }
 </style>
 </head>
-
 <body>
 
-<div id="terminal"></div>
+<div id="screen"></div>
 
 <script>
-const terminal = document.getElementById("terminal");
+const screen = document.getElementById("screen");
 
-const fakeLines = [
-"Initialisation du protocole...",
-"Connexion au serveur distant...",
-"Bypass du firewall...",
-"Injection du payload...",
-"Décryptage AES-256...",
-"Accès root obtenu.",
-"Extraction des données...",
-"Uploading virus.exe...",
-"Accès administrateur confirmé.",
-"Suppression des logs..."
-];
-
-function generateLine() {
-    const randomHex = Math.random().toString(16).substring(2, 10);
-    const randomLine = fakeLines[Math.floor(Math.random() * fakeLines.length)];
-    return `[${randomHex}] ${randomLine}\n`;
+function randomLine() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789{}[]<>;:+=-*%$#@!";
+    let line = "";
+    for (let i = 0; i < 100; i++) {
+        line += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return line + "\n";
 }
 
-function scrollEffect() {
-    terminal.textContent += generateLine();
-    terminal.scrollTop = terminal.scrollHeight;
+function scrollFast() {
+    for (let i = 0; i < 30; i++) {
+        screen.textContent += randomLine();
+    }
+
+    screen.scrollTop = screen.scrollHeight;
+
+    if (screen.textContent.length > 30000) {
+        screen.textContent = screen.textContent.slice(-15000);
+    }
 }
 
-setInterval(scrollEffect, 50);
+setInterval(scrollFast, 10);
 </script>
 
 </body>
