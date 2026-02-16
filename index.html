@@ -2,21 +2,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Fake Terminal</title>
+<title>Full Screen Terminal</title>
+
 <style>
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     background: black;
-    color: #00ff00;
-    font-family: monospace;
     overflow: hidden;
 }
 
 #screen {
-    padding: 10px;
-    white-space: pre;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
+    color: #00ff00;
+    font-family: monospace;
     font-size: 12px;
+    white-space: pre;
+    padding: 10px;
+    box-sizing: border-box;
 }
 </style>
 </head>
@@ -30,25 +39,25 @@ const screen = document.getElementById("screen");
 function randomLine() {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789{}[]<>;:+=-*%$#@!";
     let line = "";
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 120; i++) {
         line += chars[Math.floor(Math.random() * chars.length)];
     }
     return line + "\n";
 }
 
-function scrollFast() {
-    for (let i = 0; i < 30; i++) {
+function flood() {
+    for (let i = 0; i < 40; i++) {
         screen.textContent += randomLine();
     }
 
-    screen.scrollTop = screen.scrollHeight;
-
-    if (screen.textContent.length > 30000) {
-        screen.textContent = screen.textContent.slice(-15000);
+    if (screen.textContent.length > 50000) {
+        screen.textContent = screen.textContent.slice(-25000);
     }
+
+    screen.scrollTop = screen.scrollHeight;
 }
 
-setInterval(scrollFast, 10);
+setInterval(flood, 10);
 </script>
 
 </body>
